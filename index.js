@@ -32,11 +32,14 @@ function ProtoDict(proto) {
     , delete: dict.delete
     , clear: dict.clear
     , forEach: function forEach(callback, thisArg) {
+        var done = new Dict()
         dict.forEach(function(value, key) {
+          done.set(key)
           callback.call(thisArg, value, key, protoDict)
         })
         proto.forEach(function(value, key) {
-          callback.call(thisArg, value, key, protoDict)
+          if (!done.has(key))
+            callback.call(thisArg, value, key, protoDict)
         })
       }
     })
