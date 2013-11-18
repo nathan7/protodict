@@ -15,8 +15,10 @@ function methods(obj, methodHash) {
 function ProtoDict(proto) {
   var dict = new Dict()
 
-  if (typeof proto !== 'object')
+  if (typeof proto !== 'object') {
+    methods(dict, { replace: dict.set })
     return dict
+  }
 
   var protoDict = {}
   methods(protoDict
@@ -26,20 +28,25 @@ function ProtoDict(proto) {
           : proto.get(key, defaultValue)
       }
     , set: dict.set
+    , replace: function(key, value) {
+        if (dict.has(key))
+          dict.set(key, value)
+        else if (typeof proto.replace == 'function')
+          proto.replace(key, value)
+        else
+          proto.set(key, value)
+      }
     , has: function(key) {
         return dict.has(key) || proto.has(key)
       }
     , delete: dict.delete
     , clear: dict.clear
     , forEach: function forEach(callback, thisArg) {
-        var done = new Dict()
         dict.forEach(function(value, key) {
-          done.set(key)
           callback.call(thisArg, value, key, protoDict)
         })
         proto.forEach(function(value, key) {
-          if (!done.has(key))
-            callback.call(thisArg, value, key, protoDict)
+          callback.call(thisArg, value, key, protoDict)
         })
       }
     })
