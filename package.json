@@ -1,0 +1,35 @@
+{
+  "name": "protodict",
+  "version": "1.0.0",
+  "description": "a reliable dictionary with prototypal inheritance.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nathan7/protodict.git"
+  },
+  "keywords": [
+    "proto",
+    "prototype",
+    "prototypal",
+    "inheritance",
+    "dict",
+    "dictionary"
+  ],
+  "author": "Nathan Zadoks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nathan7/protodict/issues"
+  },
+  "dependencies": {
+    "dict": "~1.4.0"
+  },
+  "devDependencies": {
+    "chai-spies": "~0.5.1",
+    "objmap": "~1.1.0",
+    "mocha": "~1.13.0",
+    "chai": "~1.8.0"
+  }
+}
